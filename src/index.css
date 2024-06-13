@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        @apply overflow-x-hidden;
+    }
+    body {
+        @apply min-h-[100svh] font-Vietnam relative overflow-hidden;
+    }
+    ::-webkit-scrollbar {
+        @apply w-[6px] h-[6px];
+    }
+    ::-webkit-scrollbar-track {
+        @apply bg-gray-400 dark:bg-gray-600;
+    }
+    ::-webkit-scrollbar-thumb {
+        @apply bg-gray-600 dark:bg-black rounded-sm;
+    }
+}
+
+@layer components {
+    .container {
+        @apply px-[15px] mx-auto md:w-[750px] lg:w-[970px] xl:w-[1170px];
+    }
+    .sidebar {
+        @apply absolute duration-300 z-10 h-full translate-x-full bg-white px-3 pt-12 pb-12 right-0 top-0 w-3/4 dark:bg-black dark:text-gray-300 min-h-[calc(100svh_-_6.5rem)] lg:w-1/4 lg:max-w-[25%] lg:max-h-[calc(100svh_-_6.5rem)] lg:h-auto lg:-translate-x-0 lg:w-auto lg:basis-1/4 lg:block lg:static lg:z-auto lg:pt-8;
+    }
+    .sidebar.show {
+        @apply -translate-x-0;
+    }
+    .chat {
+        @apply cursor-pointer px-2 py-3 flex items-center justify-between text-black rounded-md dark:text-white hover:bg-gray-300 dark:hover:bg-gray-600;
+    }
+    .chat.active {
+        @apply bg-gray-300 dark:bg-gray-600 cursor-default;
+    }
+    .message {
+        @apply px-12 py-8 overflow-x-auto flex-col flex gap-4 text-black dark:text-gray-300 md:gap-6 md:flex-row md:items-start md:px-16;
+    }
+    .message.ai {
+        @apply bg-gray-300 dark:bg-gray-600;
+    }
+    .message * {
+        @apply whitespace-pre-wrap max-w-full break-words;
+    }
+    .login-input {
+        @apply bg-white shadow-md shadow-gray-400 w-full border-2 outline-none border-black rounded-md px-3 py-2 text-black dark:shadow-none dark:bg-black dark:text-gray-300 dark:border-gray-600;
+    }
+    .login-input.error {
+        @apply border-2 border-red;
+    }
+}
