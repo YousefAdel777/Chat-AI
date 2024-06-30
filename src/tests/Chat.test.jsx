@@ -14,16 +14,18 @@ describe("<Chat />", () => {
         render(<Chat deleteChat={deleteChat} onClick={onClick} active={true} {...chat} />);
     });
 
-    test("renders chat name", () => {
-        const element = screen.getByText("test");
-        expect(element).toBeDefined();
-        expect(element.parentElement).toHaveClass("active");
+    test("should render all elements properly", () => {
+        const chat = screen.getByText("test");
+        expect(chat).toBeInTheDocument();
+        expect(screen.getByTitle("Delete")).toBeInTheDocument();
+        expect(chat).toBeInTheDocument();
     });
 
     test("handles user click", async () => {
         const user = userEvent.setup();
         await user.click(screen.getByRole("paragraph"));
-        expect(onClick.mock.calls.length).toBe(1);
+        expect(screen.getByRole("paragraph").parentElement).toHaveClass("active");
+        expect(onClick.mock.calls).toHaveLength(1);
     });
 
     test("calls delete chat", async () => {

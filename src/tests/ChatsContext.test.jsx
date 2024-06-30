@@ -1,10 +1,9 @@
-import { render, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
+import { customRender } from "./utils";
 import userEvent from "@testing-library/user-event";
 import { test, describe, expect } from "vitest";
 import "@testing-library/jest-dom";
-import { BrowserRouter } from "react-router-dom";
-import ChatsContext, { useChatsContext } from "../contexts/ChatsContext";
-import AuthContext from "../contexts/AuthContext";
+import { useChatsContext } from "../contexts/ChatsContext";
 
 const TestingComponent = () => {
     const {dispatch, chats, currentChatId, isLoading, isError, deleteChat, newMessage, setCurrentChat} = useChatsContext();
@@ -24,17 +23,8 @@ const TestingComponent = () => {
 }
 
 describe("<ChatsContext />", () => {
-
     test("provides expected ChatsContext to children", async () => {
-        const {getByTestId} = render(
-            <BrowserRouter>
-                <AuthContext>
-                    <ChatsContext>
-                        <TestingComponent />
-                    </ChatsContext>
-                </AuthContext>
-            </BrowserRouter>
-        );
+        const {getByTestId} = customRender(<TestingComponent />);
         const user = userEvent.setup();
         const chats = getByTestId("chats");
         const loading = getByTestId("loading");
