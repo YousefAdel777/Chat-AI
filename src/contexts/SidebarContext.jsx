@@ -3,14 +3,14 @@
 import {createContext, useContext, useReducer} from "react";
 import SidebarReducer from "./SidebarReducer";
 
-const SidebarProvider = createContext();
-export const useSidebarContext = () => useContext(SidebarProvider);
+export const SidebarContext = createContext();
+export const useSidebarContext = () => useContext(SidebarContext);
 
 const initialState = {
     isVisible: false,
 }
 
-const SidebarContext = ({children}) => {
+const SidebarContextProvider = ({children}) => {
 
     const [state, dispatch] = useReducer(SidebarReducer, initialState);
 
@@ -23,10 +23,10 @@ const SidebarContext = ({children}) => {
     }
 
     return (
-        <SidebarProvider.Provider value={{isVisible: state.isVisible, showSidebar, hideSidebar}}>
+        <SidebarContext.Provider value={{isVisible: state.isVisible, showSidebar, hideSidebar}}>
             {children}
-        </SidebarProvider.Provider>
+        </SidebarContext.Provider>
     );
 }
 
-export default SidebarContext;
+export default SidebarContextProvider;

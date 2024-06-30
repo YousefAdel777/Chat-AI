@@ -8,8 +8,8 @@ import { db } from "../firebase/config";
 import {doc, onSnapshot, collection, updateDoc, addDoc, getDoc, query, where, deleteDoc} from "firebase/firestore";
 const API_KEY = import.meta.env.VITE_GEIMINI_API_KEY;
 
-const ChatsProvider = createContext();
-export const useChatsContext = () => useContext(ChatsProvider);
+export const ChatsContext = createContext();
+export const useChatsContext = () => useContext(ChatsContext);
 
 const initialState = {
     chats: [],
@@ -18,7 +18,7 @@ const initialState = {
     isError: false,
 }
 
-const ChatsContext = ({children}) => {
+const ChatsContextProvider = ({children}) => {
     const [state, dispatch] = useReducer(ChatsReducer, initialState);
     const {user} = useAuthContext();
 
@@ -154,10 +154,10 @@ const ChatsContext = ({children}) => {
     }
 
     return (
-        <ChatsProvider.Provider value={{dispatch, chats: state.chats, currentChatId: state.currentChatId, isLoading: state.isLoading, isError: state.isError, deleteChat, newMessage, setCurrentChat}}>
+        <ChatsContext.Provider value={{dispatch, chats: state.chats, currentChatId: state.currentChatId, isLoading: state.isLoading, isError: state.isError, deleteChat, newMessage, setCurrentChat}}>
             {children}
-        </ChatsProvider.Provider>
+        </ChatsContext.Provider>
     );
 }
 
-export default ChatsContext;
+export default ChatsContextProvider;

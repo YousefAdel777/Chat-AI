@@ -6,7 +6,7 @@ import { useNavigate } from "react-router";
 import AuthReducer from "./AuthReducer";
 import  {auth} from "../firebase/config";
 
-const AuthContext = createContext();
+export const AuthContext = createContext();
 export const useAuthContext = () => useContext(AuthContext);
 
 const initialState = {
@@ -24,7 +24,7 @@ const AuthContextProvider = ({children}) => {
                 navigate("/");
             }
             else {
-                dispatch({type: "LOGOUT"});
+                logout();
             }
         });
         return () => unsub;

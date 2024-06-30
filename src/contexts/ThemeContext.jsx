@@ -3,7 +3,7 @@
 import {createContext, useContext, useReducer, useEffect} from "react";
 import ThemeReducer from "./ThemeReducer";
 
-const ThemeContext = createContext();
+export const ThemeContext = createContext();
 export const useThemeContext = () => useContext(ThemeContext);
 
 const initialState = {
